@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --font-sans: 'Arial', 'Helvetica Neue', sans-serif;
+  --font-serif: Georgia, serif;
+  --radius-lg: 0.75rem;
+}
+
+:root {
+  color-scheme: dark;
+  --background: #08080b;
+  --foreground: #f7f4ff;
+  --card: #101014;
+  --card-foreground: #f7f4ff;
+  --primary: #8537ee;
+  --primary-foreground: #ffffff;
+  --muted-foreground: #96939f;
+  --border: #232129;
+  --destructive: #ef476f;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--background); scroll-behavior: smooth; }
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, 'Helvetica Neue', sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+::selection { background: #8537ee; color: white; }
+
+@media (min-width: 768px) {
+  body { background: radial-gradient(circle at 50% -10%, #17102c 0, #08080b 42rem); }
+}
