@@ -57,7 +57,14 @@ export function FlashTokenPage() {
 }
 
 function TokenMark({ symbol, tone, bg, pill, network }: { symbol: string; tone: string; bg: string; pill: string; network: string }) {
-  return <span className="relative mx-auto flex w-fit flex-col items-center" aria-label={`${network} token symbol`}><span className={`flex h-16 w-16 items-center justify-center rounded-full border border-white/10 ${bg} ${tone} shadow-inner`}><span className="text-4xl font-black leading-none">{symbol}</span></span><span className="absolute -right-2 bottom-[-4px] flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#101016] bg-emerald-500 text-sm font-black text-white shadow-md">T</span><span className={`mt-2 rounded-full px-3 py-1 text-xs font-bold leading-none ${pill}`}>{network}</span></span>
+  return <span className="relative mx-auto flex w-fit flex-col items-center" aria-label={`${network} token symbol`}><span className={`flex h-16 w-16 items-center justify-center rounded-full border border-white/10 ${bg} ${tone} shadow-inner`}><NetworkLogo network={network} symbol={symbol}/></span><span className="absolute -right-2 bottom-[22px] flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#17171d] bg-emerald-500 text-sm font-black text-white shadow-md">T</span><span className={`mt-2 rounded-full px-3 py-1 text-xs font-bold leading-none ${pill}`}>{network}</span></span>
+}
+
+function NetworkLogo({ network, symbol }: { network: string; symbol: string }) {
+  if (network === 'ERC-20') return <svg viewBox="0 0 64 64" className="h-12 w-12" aria-hidden="true"><path d="M32 7 17 32l15 9 15-9L32 7Z" fill="currentColor" opacity=".9"/><path d="M32 45 17 36l15 21 15-21-15 9Z" fill="currentColor" opacity=".55"/><path d="M32 7v34l15-9L32 7Z" fill="currentColor" opacity=".68"/></svg>
+  if (network === 'TRC-20') return <svg viewBox="0 0 64 64" className="h-12 w-12" aria-hidden="true"><path d="m10 12 44 9-27 35-17-44Z" fill="currentColor" opacity=".95"/><path d="m10 12 24 23 20-14-44-9Z" fill="none" stroke="currentColor" strokeWidth="3"/><path d="m34 35-7 21 27-35" fill="none" stroke="currentColor" strokeWidth="3"/></svg>
+  if (network === 'BEP-20') return <svg viewBox="0 0 64 64" className="h-12 w-12" aria-hidden="true"><path d="m32 7 8 8-8 8-8-8 8-8Zm-15 15 8 8-8 8-8-8 8-8Zm30 0 8 8-8 8-8-8 8-8ZM32 37l8 8-8 8-8-8 8-8Zm0-7 8 8-8 8-8-8 8-8Z" fill="currentColor"/></svg>
+  return <svg viewBox="0 0 64 64" className="h-12 w-12" aria-hidden="true"><path d="m25 10 11-6 11 6v13l-11 6-11-6V10Zm-8 17 11-6 11 6v13l-11 6-11-6V27Zm22 0 11-6 11 6v13l-11 6-11-6V27Z" fill="none" stroke="currentColor" strokeWidth="6" strokeLinejoin="round"/></svg>
 }
 function Stat({ value, label }: { value: string; label: string }) { return <div><strong className="text-3xl font-bold text-foreground md:text-4xl">{value}</strong><p className="mt-1 text-sm text-muted-foreground">{label}</p></div> }
 function IconBadge({ children }: { children: React.ReactNode }) { return <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary [&>svg]:h-8 [&>svg]:w-8">{children}</div> }
