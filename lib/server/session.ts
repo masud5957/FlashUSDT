@@ -28,7 +28,7 @@ export async function getOrCreateSession() {
 export async function requireAdmin(request: Request) {
   const expected = process.env.ADMIN_API_KEY
   if (!expected) throw new Error('ADMIN_API_KEY is not configured')
-  const supplied = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '')
+  const supplied = request.headers.get('x-admin-api-key') ?? request.headers.get('authorization')?.replace(/^Bearer\s+/i, '')
   if (!supplied || supplied !== expected) return false
   return true
 }
