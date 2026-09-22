@@ -31,6 +31,8 @@
   --muted-foreground: #a8a19a;
   --border: #332a27;
   --destructive: #ef476f;
+  --ink-soft: #161214;
+  --vermilion-soft: #3a1d1a;
 }
 
 * { box-sizing: border-box; }
@@ -40,6 +42,4 @@ button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
 ::selection { background: #8537ee; color: white; }
 
-@media (min-width: 768px) {
-  body { background: radial-gradient(circle at 50% -10%, #17102c 0, #08080b 42rem); }
-}
+body { background: var(--background); }
