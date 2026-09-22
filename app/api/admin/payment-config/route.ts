@@ -17,9 +17,14 @@ export async function PUT(request: Request) {
   if (!(await requireAdmin(request))) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   const parsed = configSchema.safeParse(await request.json())
   if (!parsed.success) return NextResponse.json({ error: parsed.error.issues[0]?.message ?? 'Invalid configuration' }, { status: 400 })
-  const db = getDb()
-  const values = { network: 'BEP-20', walletAddress: parsed.data.walletAddress, qrCodeDataUrl: parsed.data.qrCodeDataUrl ?? null, instructions: parsed.data.instructions ?? null, updatedAt: new Date() }
-  const [config] = await db.insert(paymentConfig).values({ id: 1, ...values }).onConflictDoUpdate({ target: paymentConfig.id, set: values }).returning()
-  await db.insert(auditLogs).values({ action: 'payment_config_updated', actor: 'admin', entityId: '1', metadata: { network: 'BEP-20' } })
-  return NextResponse.json(config)
+  try {
+    const db = getDb()
+    const values = { network: 'BEP-20', walletAddress: parsed.data.walletAddress, qrCodeDataUrl: parsed.data.qrCodeDataUrl ?? null, instructions: parsed.data.instructions ?? null, updatedAt: new Date() }
+    const [config] = await db.insert(paymentConfig).values({ id: 1, ...values }).onConflictDoUpdate({ target: paymentConfig.id, set: values }).returning()
+    await db.insert(auditLogs).values({ action: 'payment_config_updated', actor: 'admin', entityId: '1', metadata: { network: 'BEP-20' } })
+    return NextResponse.json(config)
+  } catch (error) {
+    console.error('[admin/payment-config] update failed', error)
+    return NextResponse.json({ error: 'Payment configuration could not be saved. Verify DATABASE_URL and run the database migration.' }, { status: 500 })
+  }
 }

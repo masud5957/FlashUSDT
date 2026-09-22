@@ -20,8 +20,10 @@ export function AdminPanel() {
         headers: { 'content-type': 'application/json', 'x-admin-api-key': apiKey },
         body: JSON.stringify({ walletAddress, qrCodeDataUrl: qrCodeDataUrl || null, instructions: instructions || null }),
       })
-      const result = await response.json()
-      if (!response.ok) throw new Error(result.error || 'Unable to save configuration')
+      const responseText = await response.text()
+      let result: { error?: string } = {}
+      try { result = responseText ? JSON.parse(responseText) : {} } catch { result = {} }
+      if (!response.ok) throw new Error(result.error || `Unable to save configuration (${response.status})`)
       setMessage('Payment configuration saved.')
     } catch (error) {
       setMessage(error instanceof Error ? error.message : 'Unable to save configuration')
