@@ -5,7 +5,7 @@ import { getDb } from '@/lib/db/client'
 import { auditLogs, paymentConfig } from '@/lib/db/schema'
 import { requireAdmin } from '@/lib/server/session'
 
-const configSchema = z.object({ walletAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/, 'Enter a valid BEP-20 wallet address'), qrCodeDataUrl: z.string().max(2_000_000).nullable().optional(), instructions: z.string().max(2000).nullable().optional() })
+const configSchema = z.object({ walletAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/, 'Enter a valid BEP-20 wallet address'), qrCodeDataUrl: z.string().url('Enter a valid QR image URL').max(2048).nullable().optional(), instructions: z.string().max(2000).nullable().optional() })
 
 export const dynamic = 'force-dynamic'
 
