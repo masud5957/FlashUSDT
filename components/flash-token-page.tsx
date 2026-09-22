@@ -4,10 +4,13 @@ import { useEffect, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { AlertTriangle, Check, ChevronDown, Clock3, Copy, Cpu, Globe2, LockKeyhole, LoaderCircle, Menu, Radio, Search, Send, ShieldCheck, Sparkles, WalletCards, X, Zap } from 'lucide-react'
 
-const networks = ['BEP-20']
-  const tokenOptions = [
+const networks = ['ERC-20', 'TRC-20', 'BEP-20', 'MATIC']
+const tokenOptions = [
+  { name: 'USDT', network: 'ERC-20', symbol: '◆', tone: 'text-slate-300', bg: 'bg-slate-700/60', pill: 'bg-blue-950/80 text-blue-400' },
+  { name: 'USDT', network: 'TRC-20', symbol: '△', tone: 'text-red-500', bg: 'bg-red-950/70', pill: 'bg-red-950 text-red-500' },
   { name: 'USDT', network: 'BEP-20', symbol: '✥', tone: 'text-yellow-400', bg: 'bg-yellow-950/70', pill: 'bg-yellow-950 text-yellow-400' },
-  ]
+  { name: 'USDT', network: 'MATIC', symbol: '⬡', tone: 'text-violet-500', bg: 'bg-violet-950/80', pill: 'bg-violet-950 text-violet-400' },
+]
 const faqs = [
   ['What is Flash Token?', 'Flash Token is a service that generates temporary USDT tokens on multiple blockchain networks including Ethereum, Tron, BSC, and Polygon. These tokens can be used for testing, development, or demonstration purposes.'],
   ['Can I use Flash USDT for trading?', 'No, it is purely for testing purposes and is not designed for real-world transactions. Flash tokens are not redeemable for real assets.'],
@@ -19,7 +22,7 @@ const faqs = [
 export function FlashTokenPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [language, setLanguage] = useState('EN')
-  const [selectedToken, setSelectedToken] = useState(0)
+  const [selectedToken, setSelectedToken] = useState(3)
   const [selectedAmount, setSelectedAmount] = useState('30,000 USDT')
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const [ready, setReady] = useState(false)
