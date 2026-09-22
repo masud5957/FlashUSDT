@@ -7,10 +7,17 @@ import { requireAdmin } from '@/lib/server/session'
 
 const configSchema = z.object({ walletAddress: z.string().regex(/^0x[a-fA-F0-9]{40}$/, 'Enter a valid BEP-20 wallet address'), qrCodeDataUrl: z.string().max(2_000_000).nullable().optional(), instructions: z.string().max(2000).nullable().optional() })
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
-  const db = getDb()
-  const [config] = await db.select().from(paymentConfig).where(eq(paymentConfig.id, 1)).limit(1)
-  return NextResponse.json(config ?? null)
+  try {
+    const db = getDb()
+    const [config] = await db.select().from(paymentConfig).where(eq(paymentConfig.id, 1)).limit(1)
+    return NextResponse.json(config ?? null)
+  } catch (error) {
+    console.error('[admin/payment-config] read failed', error)
+    return NextResponse.json(null)
+  }
 }
 
 export async function PUT(request: Request) {
