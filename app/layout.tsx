@@ -7,21 +7,9 @@ export const metadata: Metadata = {
   description: 'Flash USDT provides a polished digital asset payment experience for customers in China and worldwide.',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/flash-usdt-logo.png',
+    shortcut: '/flash-usdt-logo.png',
+    apple: '/flash-usdt-logo.png',
   },
 }
 
