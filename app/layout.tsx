@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Crypto Voice | 加密之声',
-  description: 'Crypto Voice provides a polished digital asset payment experience for customers in China and worldwide.',
+  title: 'Flash USDT | 闪兑 USDT',
+  description: 'Flash USDT provides a polished digital asset payment experience for customers in China and worldwide.',
   generator: 'v0.app',
   icons: {
     icon: [

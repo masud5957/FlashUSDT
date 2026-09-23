@@ -25,8 +25,9 @@ CREATE TABLE "payment_config" (
 	"network" text DEFAULT 'BEP-20' NOT NULL,
 	"wallet_address" text NOT NULL,
 	"qr_code_data_url" text,
-	"instructions" text,
-	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
+		"instructions" text,
+		"telegram_url" text,
+		"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "payment_submissions" (

@@ -22,6 +22,7 @@ try {
   } else {
     console.log(`Migration ${migrationId} already applied`)
   }
+  await sql`ALTER TABLE payment_config ADD COLUMN IF NOT EXISTS telegram_url text`
 } finally {
   await sql.end({ timeout: 5 })
 }

@@ -7,6 +7,7 @@ export function AdminPanel() {
   const [walletAddress, setWalletAddress] = useState('')
   const [qrCodeUrl, setQrCodeUrl] = useState('')
   const [instructions, setInstructions] = useState('')
+  const [telegramUrl, setTelegramUrl] = useState('https://t.me/CryptoVoice')
   const [message, setMessage] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -18,7 +19,7 @@ export function AdminPanel() {
       const response = await fetch('/api/admin/payment-config', {
         method: 'PUT',
         headers: { 'content-type': 'application/json', 'x-admin-api-key': apiKey },
-        body: JSON.stringify({ walletAddress, qrCodeDataUrl: qrCodeUrl || null, instructions: instructions || null }),
+        body: JSON.stringify({ walletAddress, qrCodeDataUrl: qrCodeUrl || null, instructions: instructions || null, telegramUrl: telegramUrl || null }),
       })
       const responseText = await response.text()
       let result: { error?: string } = {}
@@ -44,6 +45,7 @@ export function AdminPanel() {
           <label className="block space-y-2"><span className="text-sm font-medium">Admin API key</span><input required type="password" value={apiKey} onChange={event => setApiKey(event.target.value)} className="w-full rounded-xl border border-border bg-background px-4 py-3 outline-none focus:border-primary" autoComplete="off" /></label>
           <label className="block space-y-2"><span className="text-sm font-medium">BEP-20 receiving wallet</span><input required value={walletAddress} onChange={event => setWalletAddress(event.target.value)} placeholder="0x..." className="w-full rounded-xl border border-border bg-background px-4 py-3 font-mono text-sm outline-none focus:border-primary" /></label>
           <label className="block space-y-2"><span className="text-sm font-medium">QR code image URL</span><input type="url" value={qrCodeUrl} onChange={event => setQrCodeUrl(event.target.value)} placeholder="https://i.ibb.co/your-image/qr-code.png" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" /><span className="text-xs text-muted-foreground">Upload the QR image to ImgBB, then paste its direct image URL here.</span></label>
+          <label className="block space-y-2"><span className="text-sm font-medium">Telegram contact URL</span><input type="url" value={telegramUrl} onChange={event => setTelegramUrl(event.target.value)} placeholder="https://t.me/CryptoVoice" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" /><span className="text-xs text-muted-foreground">Change the floating Telegram contact button without editing the site.</span></label>
           <label className="block space-y-2"><span className="text-sm font-medium">Payment instructions</span><textarea value={instructions} onChange={event => setInstructions(event.target.value)} placeholder="Send USDT on BEP-20 only..." rows={4} className="w-full resize-y rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none focus:border-primary" /></label>
           <button disabled={busy} className="w-full rounded-xl bg-primary px-4 py-3 font-semibold text-primary-foreground disabled:opacity-60">{busy ? 'Saving...' : 'Save payment configuration'}</button>
           {message && <p role="status" className="rounded-xl border border-border bg-background px-4 py-3 text-sm text-muted-foreground">{message}</p>}

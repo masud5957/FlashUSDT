@@ -13,6 +13,7 @@ export const paymentConfig = pgTable('payment_config', {
   walletAddress: text('wallet_address').notNull(),
   qrCodeDataUrl: text('qr_code_data_url'),
   instructions: text('instructions'),
+  telegramUrl: text('telegram_url'),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 })
 
