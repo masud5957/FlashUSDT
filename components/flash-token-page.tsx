@@ -37,7 +37,7 @@ export function FlashTokenPage() {
   const [paymentQrCode, setPaymentQrCode] = useState<string | null>(null)
   const [telegramUrl, setTelegramUrl] = useState('https://t.me/CryptoVoice')
   const token = tokenOptions[selectedToken]
-  const processingFee = selectedAmount === '30,000 USDT' ? '39.00 USD' : selectedAmount === '90,000 USDT' ? '86.00 USD' : selectedAmount === '200,000 USDT' ? '159.00 USD' : '398.00 USD'
+  const processingFee = selectedAmount === '30,000 USDT' ? '299.00 USD' : selectedAmount === '90,000 USDT' ? '799.00 USD' : selectedAmount === '200,000 USDT' ? '1,899.00 USD' : '2,999.00 USD'
 
   useEffect(() => {
     let active = true
